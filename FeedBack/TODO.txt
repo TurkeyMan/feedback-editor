@@ -1,0 +1,183 @@
+FeedBack ToDO
+-------------
+
+General ToDo:
+-------------
+
+Define and release an updated '.chart' spec
+ - New spec includes all new features including vocals and drums
+   * HOPO identification
+   * Slide identification
+   * Vocal events
+   * Drum change events
+   * Drum sample listings (do we want to draw 'default' drum samples from the active theme?)
+   * Lots of other things...
+ - Also define new format rules
+ - Clearly define how song specific album covers, fretboards, theme elements, etc are selected (ie, acceptable directory structure/etc)
+ - Should aim to 'replace' but still must not conflict with FoF distribution rules
+
+
+Editor:
+-------
+
+Editor needs to be reworked into commands
+ - Undo/Redo stack
+
+Arbitrary hotkey -> Command mapping
+ - Maybe just an event placement mode, using the numbers?
+
+'sections.txt' should populate the 'Place Section' dialog
+
+'Clear track data' in the menu (like 'Copy track data')
+
+Windows clipboard support for the actual note data (not just strings)
+ - Paste chart segments in between different charts, or into txt files
+
+Quit save prompt
+
+Drum track needs to appear like a drum track
+ - And drums require configurable samples and sample changes at arbitrary points in the track
+ - Replace claps with drum sample triggers
+ - Ability to mask particular drum tracks
+
+Enhance note placement logic to support extended features
+ - HOPO placement, hold hopo's, hopo after chords...? + Something to visualise that it's been changed
+ - 'GH:WT' features.. *Grrrr .. Slide notes
+ - RB features (drum fill, Overdrive, solo)
+ - Feature to toggle between enhanced and 'GH2' note placement rules
+
+Fingering editor
+ - Separate editor window showing fretboard for complex hand placement
+ - Support simple backwards compatibility with GH games
+
+Fretboard overlays
+ - Waveform (requires DSP support in the audio subsystem)
+ - Spectrum analysis (needs an FFT DSP)
+
+Vocal track editor
+ - Horizontal track, render fret lines
+ - Visualise chromatic scale as 12 distinct rows
+ - Show tuner on screen (as people sing a note, it will show the note they are singing to assist plcement)
+
+
+Frequent Requests:
+
+Lighting visualisation
+ - This can come later after game mode exists and we're rendering a stage
+
+BPM analyser
+ - I don't like the idea of this, countless poor quality charts will follow
+
+Record mode
+ - I've been holding out on this for years, don't really want to add it now
+
+Mouse support
+ - Yeah, lots of people want this. The Theme/GUI stuff will help this a lot
+
+
+Bugs:
+
+Pasting notes should delete everythign in the paste range before pasting the notes
+
+Track events should only exist on expert tracks (why are they *track* events if this is the case?)
+
+If there's more than 6 or so event-like items (including section names, track events, and song events) at some position in the song, and E or W is pressed when the cursor is at that position, dB crashes. 
+
+Enclose track events with quotation marks, so that events that have spaces in the text will not be truncated by dB on re-loading the chart (such as "map HandMap_DropD2").
+
+When playing with two tracks open (I.e. reference track), the notes on the active track (the one that is highlighted/selected) are reset fine when playing is stopped, but the notes on the other, passive track become dim (just the ones that scrolled past while playing the song).
+
+-----------------------------------------------------------------------------------
+Game Mode Stage 1 (Get it working!):
+------------------------------------
+
+Theme system design
+ - This is the majority of the work
+ - Needs to be carefully designed
+ - Theme scripts configurable by ini or xml files
+ - Consider StepMania skinning system for inspiration
+ - This is required before virtually everything else...
+
+Main Menu screen
+ - Show the main menu as a HUB to other screens
+ - Simple starting point to test the theme/skinning system
+ - Connects
+   * Start Game
+   * Options
+   * Editor
+   * Quit
+   * (more features later, it band creation, character editor, etc)
+
+Options screen
+ - Options including:
+  * Theme settings
+    - Theme selection
+    - Basic theme configuration
+  * Gfx options
+    - Fullscreen, resolution, quality settings, etc
+    - Gfx driver selection (D3D/OpenGL/etc)
+  * Audio settings
+    - Sound driver
+    - Sync source option
+    - Levels, etc
+  * Controller config
+    - Most controllers are auto-configured
+    - Association with players
+    - Mic settings/PC input selection
+  * Language selection
+  * Load/Save/Network stuff
+    - Load/save, directories, songs location, etc
+
+Song Selector screen
+ - Themes need a way to expose the song database, and produce a skinable song selection screen
+ - Songs should be grouped into 'groups', allowing separation of GH1, GH2, GH3, DLC, etc song lists
+ - Groups need a way to dictate subgrouping ('Your First Gig', 'Face Melters', etc)
+ - Songs should each support an album cover image, if it's missing, use the group image
+ - Alternate sort modes to list by group, all songs alphabetically, most played, etc
+
+Gameplay screen
+ - Gameplay logic exist, used in editor during playback
+ - Player note detection code needs work
+ - HUD needs to be implemented (Theme/skinning system should solve this problem)
+
+
+Game Mode Stage 2 (Features):
+-----------------------------
+
+Vocal support
+ - Needs audio input system and a DSP for pitch detection
+ - Needs presentation work, the worm!!
+ - Needs editor support
+
+Highscore screen
+ - Will connect to scorehero in the future
+
+Band configuration screen
+ - For multi-user score tracking
+
+Practise mode
+ - Whee!
+
+
+Game Mode Stage 3 (Polish):
+---------------------------
+
+Ingame DLC screen
+ - Connect to customhero.net/scorehero.com and list custom tracks available for DLC
+ - Auto-download the music if it's freely available (For instance, demo tracks on band websites)
+ - Charts with freely available songs should be encouraged to list the URL to the mp3 in the .chart file
+
+Ingame HighScores
+ - Connect to the scorehero score database, and display/submit scores with feedback as a supported 'game'
+
+Show a 3D stage and characters
+ - By the time we reach this stage, the game will be playable, and i'll be able to get professional artists from work!
+
+Character editor
+ - Character customisation stuff...
+
+
+----------------------------------------------------------------
+Features in detail:
+
+Reserved for in detail discussion about the Theme system
