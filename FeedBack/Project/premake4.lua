@@ -5,9 +5,9 @@ solution "FeedBack"
 	platforms { "Native", "x32", "x64" }
 
 	-- include the fuji project...
-	dofile  "../../Fuji/Project/fujiproj.lua"
+	dofile  "../../../Fuji/Project/fujiproj.lua"
 
-	project "Warlords"
+	project "FeedBack"
 		kind "WindowedApp"
 		language "C++"
 		files { "../Source/**.h", "../Source/**.cpp" }
@@ -24,4 +24,4 @@ solution "FeedBack"
 
 		links { "Fuji" }
 
-		dofile "../../Fuji/Project/fujiconfig.lua"
+		dofile "../../../Fuji/Project/fujiconfig.lua"
