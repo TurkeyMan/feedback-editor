@@ -3,7 +3,7 @@
 #include "MFHeap.h"
 #include "MFSound.h"
 
-#include "GHEd.h"
+#include "FeedBack.h"
 
 #if !defined(MAKE_LEGAL)
 

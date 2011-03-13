@@ -2,7 +2,6 @@
 #define _GHARCHIVE_H
 
 #include "MFMaterial.h"
-#include <windows.h>
 
 // GH Ark file structures
 struct ARKHeader

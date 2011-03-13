@@ -1,4 +1,5 @@
-#include "GHEd.h"
+#include "FeedBack.h"
+#include "Screens/Editor.h"
 #include "Title.h"
 
 void TitleScreen::Update()
@@ -34,7 +35,7 @@ void TitleScreen::Draw()
 
 //	MFFont_DrawText(pText, , y+=height, 20, MFVector::white, "H - Enter help screen");
 
-	CenterText(rect.height - 20 - 54, 44, MFVector::red, "Press ESC to continue", pFancy);
+//	CenterText(rect.height - 20 - 54, 44, MFVector::red, "Press ESC to continue", pFancy);
 
 	MFView_Pop();
 }
@@ -44,15 +45,15 @@ void TitleScreen::Activate()
 	Pop();
 
 #if defined(_PSP)
-	gListBox.Show("Main Menu", ListCallback, 420.0f, 300.0f);
+	gpListBox->Show("Main Menu", NULL, 420.0f, 300.0f);
 #else
-	gListBox.Show("Main Menu", ListCallback);
+	gpListBox->Show("Main Menu", NULL);
 #endif
-	gListBox.AddItem("New Chart");
-	gListBox.AddItem("Load Chart");
-	gListBox.AddItem("Save Chart");
-	gListBox.AddItem("Chart Settings");
-	gListBox.AddItem("Program Settings");
-	gListBox.AddItem("Show Help");
-	gListBox.AddItem("Quit");
+	gpListBox->AddItem("New Chart");
+	gpListBox->AddItem("Load Chart");
+	gpListBox->AddItem("Save Chart");
+	gpListBox->AddItem("Chart Settings");
+	gpListBox->AddItem("Program Settings");
+	gpListBox->AddItem("Show Help");
+	gpListBox->AddItem("Quit");
 }

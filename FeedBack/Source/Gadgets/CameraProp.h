@@ -1,7 +1,9 @@
 #if !defined(_CAMERAPROP_H)
 #define _CAMERAPROP_H
 
-class CameraProp : public dBProp
+#include "Entity.h"
+
+class CameraProp : public dBEntity
 {
 public:
 	static CameraProp *Create(const char *pName);

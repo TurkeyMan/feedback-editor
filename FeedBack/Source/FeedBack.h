@@ -36,6 +36,8 @@
 
 #include "../Data/Strings.h"
 
+#define MAKE_LEGAL
+
 #define GETSECONDS(time) ((float)(time)*(1.0f/1000000.0f))
 
 #define KEY_PAUSE 0.3f

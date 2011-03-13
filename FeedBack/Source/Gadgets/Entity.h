@@ -7,6 +7,8 @@
 #include "../Tools/HashTable.h"
 #include "Action.h"
 
+class dBEntityManager;
+
 struct dBEvent
 {
 	const char *pEvent;

@@ -1,4 +1,4 @@
-#include "GHEd.h"
+#include "FeedBack.h"
 #include "CameraProp.h"
 
 CameraProp *CameraProp::Create(const char *pName)
@@ -6,7 +6,6 @@ CameraProp *CameraProp::Create(const char *pName)
 	CameraProp *pProp = new CameraProp;
 
 	MFString_Copy(pProp->name, pName);
-	pProp->world = MFMatrix::identity;
 
 	return pProp;
 }

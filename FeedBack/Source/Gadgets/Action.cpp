@@ -62,7 +62,7 @@ MFString dBRuntimeArgs::GetString(int index)
 			return str;
 		}
 	}
-	return NULL;
+	return (const char *)NULL;
 }
 
 bool dBRuntimeArgs::GetBool(int index)

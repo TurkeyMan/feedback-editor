@@ -1,4 +1,4 @@
-#include "GHEd.h"
+#include "FeedBack.h"
 #include "Scene.h"
 #include "Util/F3D.h"
 
@@ -16,7 +16,7 @@ void dBScene::Destroy()
 	dBEntity **ppP = entities.Begin();
 	while(*ppP)
 	{
-		(*ppP)->Destroy();
+		delete *ppP;
 		++ppP;
 	}
 
@@ -25,18 +25,18 @@ void dBScene::Destroy()
 	delete this;
 }
 
-void dBScene::AddProp(dBProp *pProp)
+void dBScene::AddEntity(dBEntity *pProp, int layer)
 {
 	entities.Create(pProp);
 }
 
-dBEntity *dBScene::FindProp(const char *pName)
+dBEntity *dBScene::FindEntity(const char *pName, int layer)
 {
 	dBEntity **ppI = entities.Begin();
 
 	while(*ppI)
 	{
-		if(!MFString_CaseCmp((*ppI)->name, pName))
+		if(!MFString_CaseCmp((*ppI)->GetName(), pName))
 			return *ppI;
 		++ppI;
 	}
@@ -44,7 +44,7 @@ dBEntity *dBScene::FindProp(const char *pName)
 	return NULL;
 }
 
-void dBScene::RemoveProp(dBProp *pProp)
+void dBScene::RemoveEntity(dBEntity *pProp, int layer)
 {
 	entities.Destroy(pProp);
 }

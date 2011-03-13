@@ -58,7 +58,6 @@ Fretboard::Fretboard()
 	int zRead = MFMaterial_GetParameterIndexFromName(pFrets, "zread");
 	int zWrite = MFMaterial_GetParameterIndexFromName(pFrets, "zwrite");
 	int additive = MFMaterial_GetParameterIndexFromName(pFrets, "additive");
-	int off = 0, on = 1;
 
 	pEdge = MFMaterial_Create("edge");
 	pBar = MFMaterial_Create("bar");
@@ -107,15 +106,15 @@ Fretboard::Fretboard()
 	emitter.emitRate = 100.f;
 	pEmitter = MFParticleSystem_CreateEmitter(&emitter);
 
-	MFMaterial_SetParameter(pFrets, zRead, 0, &off);
-	MFMaterial_SetParameter(pFrets, zWrite, 0, &off);
-	MFMaterial_SetParameter(pEdge, zRead, 0, &off);
-	MFMaterial_SetParameter(pEdge, zWrite, 0, &off);
-	MFMaterial_SetParameter(pBar, zRead, 0, &off);
-	MFMaterial_SetParameter(pBar, zWrite, 0, &off);
-	MFMaterial_SetParameter(pRing, zWrite, 0, &off);
+	MFMaterial_SetParameterI(pFrets, zRead, 0, 0);
+	MFMaterial_SetParameterI(pFrets, zWrite, 0, 0);
+	MFMaterial_SetParameterI(pEdge, zRead, 0, 0);
+	MFMaterial_SetParameterI(pEdge, zWrite, 0, 0);
+	MFMaterial_SetParameterI(pBar, zRead, 0, 0);
+	MFMaterial_SetParameterI(pBar, zWrite, 0, 0);
+	MFMaterial_SetParameterI(pRing, zWrite, 0, 0);
 	for(int a=0; a<5; ++a)
-		MFMaterial_SetParameter(pColourRing[a], additive, 0, &on);
+		MFMaterial_SetParameterI(pColourRing[a], additive, 0, 1);
 
 	// load models
 	pButton = MFModel_Create("Notes/button");
@@ -717,8 +716,8 @@ void Fretboard::LoadFretboard(const char *pImage)
 		int zWrite = MFMaterial_GetParameterIndexFromName(pFretboard, "zwrite");
 		int off = 0;
 
-		MFMaterial_SetParameter(pFretboard, zRead, 0, &off);
-		MFMaterial_SetParameter(pFretboard, zWrite, 0, &off);
+		MFMaterial_SetParameterI(pFretboard, zRead, 0, 0);
+		MFMaterial_SetParameterI(pFretboard, zWrite, 0, 0);
 	}
 }
 

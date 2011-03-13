@@ -43,11 +43,10 @@ void HelpScreen::Draw()
 
 	MFMaterial *pMat = MFMaterial_GetStockMaterial(MFMat_White);
 
-	size_t old, val = 0;
-	MFMaterial_GetParameter(pMat, MFMatStandard_ZRead, 0, &old);
-	MFMaterial_SetParameter(pMat, MFMatStandard_ZRead, 0, &val);
+	uintp old = MFMaterial_GetParameterI(pMat, MFMatStandard_ZRead, 0);
+	MFMaterial_SetParameterI(pMat, MFMatStandard_ZRead, 0, 0);
 	MFPrimitive_DrawUntexturedQuad(MakeVector(40, 75, 0.1f), MakeVector(640-40, 480-70, 0.1f), MakeVector(0,0,0,1));
-	MFMaterial_SetParameter(pMat, MFMatStandard_ZRead, 0, &old);
+	MFMaterial_SetParameterI(pMat, MFMatStandard_ZRead, 0, old);
 
 	float height = HELP_TEXT_HEIGHT;
 

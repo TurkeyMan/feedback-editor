@@ -52,14 +52,14 @@ public:
 
 		dBHashItem *pTemp = ppItems[hash];
 		dBHashItem *pDel = NULL;
-		if(pTemp->pItem == pItem)
+		if(!MFString_Compare(pTemp->pName, pTemp))
 		{
 			pDel = pTemp;
 			ppItems[hash] = pTemp->pNext;
 		}
 		else
 		{
-			while(pTemp->pNext && pTemp->pNext->pItem != pItem)
+			while(pTemp->pNext && !MFString_Compare(pTemp->pNext->pName, pTemp))
 				pTemp = pTemp->pNext;
 			if(pTemp->pNext)
 			{

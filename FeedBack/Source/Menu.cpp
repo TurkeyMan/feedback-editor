@@ -49,7 +49,7 @@ void MenuScreen::Activate()
 	Pop();
 
 #if defined(_PSP)
-	gListBox->Show(MFTranslation_GetString(pStrings, MENU_MAIN_MENU), ListCallback, 420.0f, 300.0f);
+	gpListBox->Show(MFTranslation_GetString(pStrings, MENU_MAIN_MENU), ListCallback, 420.0f, 300.0f);
 #else
 	gpListBox->Show(MFTranslation_GetString(pStrings, MENU_MAIN_MENU), ListCallback);
 #endif
