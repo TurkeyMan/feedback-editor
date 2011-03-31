@@ -17,7 +17,7 @@ solution "FeedBack"
 		objdir "../Build/"
 		targetdir "../"
 
-		flags { "StaticRuntime", "NoExceptions", "NoRTTI" }
+		flags { "StaticRuntime", "NoExceptions", "NoRTTI", "WinMain" }
 
 --		pchheader "Warlords.h"
 --		pchsource "Warlords.cpp"
