@@ -21,7 +21,7 @@
 #if defined(_WINDOWS)
 	#define WIN32_LEAN_AND_MEAN
 	#include <Windows.h>
-	#include "resource.h"
+	#include "../resource.h"
 #endif
 
 MFSystemCallbackFunction pInitFujiFS = NULL;
