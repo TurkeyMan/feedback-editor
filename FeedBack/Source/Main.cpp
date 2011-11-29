@@ -238,7 +238,7 @@ void Game_InitFilesystem()
 	mountData.cbSize = sizeof(MFMountDataNative);
 	mountData.priority = MFMP_Normal;
 	mountData.flags = MFMF_FlattenDirectoryStructure | MFMF_Recursive;
-	mountData.pMountpoint = "game";
+	mountData.pMountpoint = "data";
 #if defined(MF_IPHONE)
 	mountData.pPath = MFFile_SystemPath();
 #else
@@ -336,8 +336,8 @@ void Game_Init()
 	{
 		// begin theme's main screen
 		pStrings = MFTranslation_LoadStringTable("Strings", gConfig.general.language, MFLang_English);
-//		dBScreen::SetNext(new MainMenuScreen);
-		dBScreen::SetNext(new dBThemeScreen(gpTheme->GetStartScreen(), gpTheme));
+		dBScreen::SetNext(new MainMenuScreen);
+//		dBScreen::SetNext(new dBThemeScreen(gpTheme->GetStartScreen(), gpTheme));
 	}
 }
 
@@ -410,10 +410,6 @@ int GameMain(MFInitParams *pInitParams)
 {
 	MFRand_Seed((uint32)MFSystem_ReadRTC());
 
-#if !defined(_PSP)
-	gDefaults.display.displayWidth = 1024;
-	gDefaults.display.displayHeight = 576;
-#endif
 //	gDefaults.input.useDirectInputKeyboard = false;
 	gDefaults.input.useXInput = false;
 //	gDefaults.system.threadPriority = MFPriority_AboveNormal;

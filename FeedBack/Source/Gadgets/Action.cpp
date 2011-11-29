@@ -10,7 +10,7 @@ MFObjectPool dBActionManager::actionTypePool;
 dBHashList<dBActionManager::ActionType> dBActionManager::actionRegistry;
 
 const char * const gpDelimeters = " \t;:',()[]{}+-*/%\\|=";
-MFObjectPool gActionPool(sizeof(dBActionScript_Action), 128, 128);
+MFObjectPool gActionPool;
 
 MFObjectPool dBRuntimeArgs::runtimeArgPool;
 dBRuntimeArgs::Argument *dBRuntimeArgs::pArgPool = NULL;

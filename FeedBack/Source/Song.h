@@ -133,7 +133,7 @@ struct GHEvent
 class GHEventManager
 {
 public:
-	void Init(int numNotes = 256);
+	void Init();
 	void Deinit();
 
 	void Clear();

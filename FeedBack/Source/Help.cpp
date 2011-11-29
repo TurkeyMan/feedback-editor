@@ -2,7 +2,7 @@
 #include "Control.h"
 
 #include "MFTexture.h"
-#include "../Source/Materials/MFMat_Standard.h"
+#include "Materials/MFMat_Standard.h"
 
 HelpScreen::HelpScreen()
 {

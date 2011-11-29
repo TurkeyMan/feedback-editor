@@ -1355,10 +1355,10 @@ int dBChart::CalculateTickAtTime(int64 time, int *pBPM)
 
 /*** Event ***/
 
-void GHEventManager::Init(int allocCount)
+void GHEventManager::Init()
 {
-	pNotes = (GHEvent*)MFHeap_AllocAndZero(allocCount * sizeof(GHEvent));
-	numAllocated = allocCount;
+	pNotes = NULL;
+	numAllocated = 0;
 	numNotes = 0;
 }
 
@@ -1387,7 +1387,7 @@ GHEvent* GHEventManager::AddEvent(GHEventType type, int tick, int key, int param
 	if(numNotes >= numAllocated - 2)
 	{
 		// resize the array
-		int newCount = numAllocated * 2;
+		int newCount = numAllocated != 0 ? numAllocated * 2 : 256;
 		pNotes = (GHEvent*)MFHeap_Realloc(pNotes, sizeof(GHEvent) * newCount);
 		MFZeroMemory(pNotes + numAllocated, sizeof(GHEvent) * numAllocated);
 		numAllocated = newCount;
