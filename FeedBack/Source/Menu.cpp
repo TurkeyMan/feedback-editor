@@ -1,5 +1,5 @@
 #include "FeedBack.h"
-#include "MFFileSystem.h"
+#include "Fuji/MFFileSystem.h"
 #include "ListBox.h"
 #include "Control.h"
 
@@ -487,7 +487,7 @@ void MenuScreen::SetFretboardCallback(int cancel, const char *pFilename, const c
 	{
 		if(gEditor.pSong->pFretboard)
 		{
-			MFMaterial_Destroy(gEditor.pSong->pFretboard);
+			MFMaterial_Release(gEditor.pSong->pFretboard);
 			gEditor.pSong->pFretboard = NULL;
 		}
 

@@ -1,6 +1,6 @@
 #include "FeedBack.h"
-#include "MFHeap.h"
-#include "MFInput.h"
+#include "Fuji/MFHeap.h"
+#include "Fuji/MFInput.h"
 #include "Control.h"
 
 #if defined(MF_WINDOWS)
@@ -194,7 +194,7 @@ void ComboBoxScreen::Draw()
 	}
 
 	// draw text
-	MFFont_DrawText(pText, x, stringY, textHeight, MFVector::white, pString);
+	MFFont_DrawText2(pText, x, stringY, textHeight, MFVector::white, pString);
 
 	// blink cursor
 	gBlinkTime -= MFSystem_TimeDelta();
@@ -222,7 +222,7 @@ void ComboBoxScreen::Draw()
 		if(hilite)
 			MFPrimitive_DrawUntexturedQuad(x-5, y, w+10, textHeight, MakeVector(0,0,0.5f,1));
 
-		MFFont_DrawText(pText, x, y, textHeight, hilite ? MFVector::yellow : MFVector::white, pI->pString);
+		MFFont_DrawText2(pText, x, y, textHeight, hilite ? MFVector::yellow : MFVector::white, pI->pString);
 		y += textHeight;
 	}
 

@@ -1,5 +1,5 @@
 #include "FeedBack.h"
-#include "MFFileSystem.h"
+#include "Fuji/MFFileSystem.h"
 
 #include "Screens/Editor.h"
 #include "GHScreen.h"
@@ -153,5 +153,5 @@ void EditorScreen::Deselect()
 	MFSound_Destroy(gEditor.pHighTickSound);
 	MFSound_Destroy(gEditor.pLowTickSound);
 
-	MFMaterial_Destroy(gEditor.pMetronome);
+	MFMaterial_Release(gEditor.pMetronome);
 }

@@ -1,7 +1,7 @@
 #if !defined(_GHARCHIVE_H)
 #define _GHARCHIVE_H
 
-#include "MFMaterial.h"
+#include "Fuji/MFMaterial.h"
 
 // GH Ark file structures
 struct ARKHeader

@@ -23,7 +23,7 @@ dBImageProp::dBImageProp()
 dBImageProp::~dBImageProp()
 {
 	if(pImage)
-		MFMaterial_Destroy(pImage);
+		MFMaterial_Release(pImage);
 }
 
 void dBImageProp::Update()
@@ -41,7 +41,7 @@ void dBImageProp::Draw()
 	MFSetMatrix(GetMatrix());
 	MFBegin(4);
 
-	MFSetColour(colour);
+	MFSetColourV(colour);
 
 	MFSetTexCoord1(0, 0);
 	MFSetPosition(imageRect.x, imageRect.y, 0);

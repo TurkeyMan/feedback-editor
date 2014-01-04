@@ -1,5 +1,5 @@
 #include "FeedBack.h"
-#include "MFFileSystem.h"
+#include "Fuji/MFFileSystem.h"
 #include "Control.h"
 
 FileSelectorScreen::FileSelectorScreen()
@@ -200,7 +200,7 @@ void FileSelectorScreen::UpdateInput()
 	}
 	else if(TestControl(dBCtrl_Menu_Down, GHCT_Delay))
 	{
-		selected = MFMin(selected+1, items.size()-1);
+		selected = MFMin(selected+1, (int)items.size()-1);
 		listOffset = MFMax(listOffset, selected-(pageMax-1));
 	}
 	else if(TestControl(dBCtrl_Menu_Home, GHCT_Delay))
@@ -219,7 +219,7 @@ void FileSelectorScreen::UpdateInput()
 	}
 	else if(TestControl(dBCtrl_Menu_PgDn, GHCT_Delay))
 	{
-		selected = MFMin(selected+(pageMax-1), items.size()-1);
+		selected = MFMin(selected+(pageMax-1), (int)items.size()-1);
 		listOffset = MFMax(listOffset, selected-(pageMax-1));
 	}
 
@@ -259,7 +259,7 @@ void FileSelectorScreen::UpdateInput()
 			typeTimeout = 0.75f;
 
 			// find first matching item in the list
-			for(int a=0; a<items.size(); ++a)
+			for(size_t a=0; a<items.size(); ++a)
 			{
 				if(!MFString_CaseCmpN(typeBuffer, items[a].filename, len))
 				{
@@ -324,14 +324,14 @@ void FileSelectorScreen::Draw()
 	MFPrimitive_DrawUntexturedQuad(x+patternWidth+5, y-5 + patterny, w-patternWidth, textHeight + 5, MakeVector(0,0,0,1));
 
 	MFFont_DrawTextAnchored(pHeading, message, MakeVector(x, y-5, 0.0f), MFFontJustify_Top_Left, w, textHeight*2.f, MFVector::yellow);
-	MFFont_DrawText(pText, x, y-3 + pathy, textHeight, MFVector::white, "Path:");
-	MFFont_DrawText(pText, x+pathWidth+10, y-3 + pathy, textHeight, MFVector::white, path);
-	MFFont_DrawText(pText, x, y-3 + patterny, textHeight, MFVector::white, "Pattern:");
-	MFFont_DrawText(pText, x+patternWidth+10, y-3 + patterny, textHeight, MFVector::white, ext);
+	MFFont_DrawText2(pText, x, y-3 + pathy, textHeight, MFVector::white, "Path:");
+	MFFont_DrawText2(pText, x+pathWidth+10, y-3 + pathy, textHeight, MFVector::white, path);
+	MFFont_DrawText2(pText, x, y-3 + patterny, textHeight, MFVector::white, "Pattern:");
+	MFFont_DrawText2(pText, x+patternWidth+10, y-3 + patterny, textHeight, MFVector::white, ext);
 
 	y = y + listy;
 
-	int maxItem = MFMin(listOffset+pageMax, items.size());
+	int maxItem = MFMin(listOffset+pageMax, (int)items.size());
 	for(int a=listOffset; a<maxItem; ++a)
 	{
 		bool hilite = a == selected;
@@ -339,7 +339,7 @@ void FileSelectorScreen::Draw()
 		if(hilite)
 			MFPrimitive_DrawUntexturedQuad(x-5, y, w+10, textHeight, MakeVector(0,0,0.5f,1));
 
-		MFFont_DrawText(pText, x, y, textHeight, hilite ? MFVector::yellow : (items[a].directory ? MFVector::blue : MFVector::white), items[a].filename);
+		MFFont_DrawText2(pText, x, y, textHeight, hilite ? MFVector::yellow : (items[a].directory ? MFVector::blue : MFVector::white), items[a].filename);
 		y += textHeight;
 	}
 

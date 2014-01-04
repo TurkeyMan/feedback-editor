@@ -1,8 +1,8 @@
 #if !defined(_DB_HASHTABLE_H)
 #define _DB_HASHTABLE_H
 
-#include "MFHeap.h"
-#include "MFObjectPool.h"
+#include "Fuji/MFHeap.h"
+#include "Fuji/MFObjectPool.h"
 
 template <typename T>
 class dBHashList

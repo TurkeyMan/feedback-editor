@@ -100,7 +100,7 @@ void StringBoxScreen::Draw()
 	MFFont_DrawTextAnchored(pHeading, message, MakeVector(x, y-5, 0.0f), MFFontJustify_Top_Left, w, textHeight*2.f, MFVector::yellow);
 
 	// draw text
-	MFFont_DrawText(pText, x, stringY, textHeight, MFVector::white, pString);
+	MFFont_DrawText2(pText, x, stringY, textHeight, MFVector::white, pString);
 
 	// blink cursor
 	gBlinkTime -= MFSystem_TimeDelta();

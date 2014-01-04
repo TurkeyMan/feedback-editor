@@ -2,8 +2,8 @@
 #define _IMAGEPROP_H
 
 #include "Entity.h"
-#include "MFMaterial.h"
-#include "MFFont.h"
+#include "Fuji/MFMaterial.h"
+#include "Fuji/MFFont.h"
 
 class dBImageProp : public dBEntity
 {

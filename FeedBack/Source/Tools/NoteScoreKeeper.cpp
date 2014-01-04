@@ -1,5 +1,5 @@
 #include "FeedBack.h"
-#include "DebugMenu.h"
+#include "Fuji/DebugMenu.h"
 #include "NoteScoreKeeper.h"
 #include "Song.h"
 

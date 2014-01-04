@@ -1,7 +1,7 @@
 #if !defined(_TRACK_H)
 #define _TRACK_H
 
-#include "MFParticleSystem.h"
+#include "Fuji/MFParticleSystem.h"
 
 class dBTrack
 {

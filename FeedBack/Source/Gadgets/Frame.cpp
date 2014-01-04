@@ -1,6 +1,6 @@
-#include "Fuji.h"
-#include "MFMaterial.h"
-#include "MFPrimitive.h"
+#include "Fuji/Fuji.h"
+#include "Fuji/MFMaterial.h"
+#include "Fuji/MFPrimitive.h"
 
 #include "Gadgets/Frame.h"
 
@@ -14,7 +14,7 @@ dBFrame::dBFrame()
 dBFrame::~dBFrame()
 {
 	if(pMat)
-		MFMaterial_Destroy(pMat);
+		MFMaterial_Release(pMat);
 }
 
 void dBFrame::Draw()
@@ -38,7 +38,7 @@ void dBFrame::Draw()
 		MFPrimitive(PT_QuadList);
 		MFBegin(numTiles*2);
 
-		MFSetColour(colours[0]);
+		MFSetColourV(colours[0]);
 
 		// render tiled background
 		yRemaining = rect.height;
@@ -157,7 +157,7 @@ void dBFrame::SetMaterial(const char *pMaterial)
 	}
 	else if(pMat)
 	{
-		MFMaterial_Destroy(pMat);
+		MFMaterial_Release(pMat);
 		pMat = NULL;
 	}
 }

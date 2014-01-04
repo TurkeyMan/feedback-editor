@@ -1,8 +1,8 @@
-#include "Fuji.h"
-#include "MFMaterial.h"
-#include "MFSound.h"
-#include "MFModel.h"
-#include "MFFont.h"
+#include "Fuji/Fuji.h"
+#include "Fuji/MFMaterial.h"
+#include "Fuji/MFSound.h"
+#include "Fuji/MFModel.h"
+#include "Fuji/MFFont.h"
 #include "HashTable.h"
 #include "ResourceCache.h"
 

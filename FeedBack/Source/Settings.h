@@ -1,7 +1,7 @@
 #if !defined(_SETTINGS_H)
 #define _SETTINGS_H
 
-#include "MFTranslation.h"
+#include "Fuji/MFTranslation.h"
 #include "Control.h"
 
 struct dBSettings

@@ -1,16 +1,16 @@
 #include "FeedBack.h"
-#include "MFSystem.h"
-#include "MFDisplay.h"
-#include "MFFileSystem.h"
-#include "FileSystem/MFFileSystemNative.h"
-#include "FileSystem/MFFileSystemCachedFile.h"
-#include "FileSystem/MFFileSystemZipFile.h"
-#include "MFView.h"
-#include "MFPrimitive.h"
-#include "MFTexture.h"
-#include "MFIni.h"
-#include "MFThread.h"
-#include "DebugMenu.h"
+#include "Fuji/MFSystem.h"
+#include "Fuji/MFDisplay.h"
+#include "Fuji/MFFileSystem.h"
+#include "Fuji/FileSystem/MFFileSystemNative.h"
+#include "Fuji/FileSystem/MFFileSystemCachedFile.h"
+#include "Fuji/FileSystem/MFFileSystemZipFile.h"
+#include "Fuji/MFView.h"
+#include "Fuji/MFPrimitive.h"
+#include "Fuji/MFTexture.h"
+#include "Fuji/MFIni.h"
+#include "Fuji/MFThread.h"
+#include "Fuji/DebugMenu.h"
 #include "Control.h"
 
 #include "Screens/Nationality.h"
@@ -392,13 +392,13 @@ void CenterText(float y, float height, const MFVector &colour, const char *pText
 
 	if(outline)
 	{
-		MFFont_DrawText(pFont, (rect.x + rect.width*0.5f - 2) - halfWidth, y-2, height, outlineColour, pText);
-		MFFont_DrawText(pFont, (rect.x + rect.width*0.5f + 2) - halfWidth, y-2, height, outlineColour, pText);
-		MFFont_DrawText(pFont, (rect.x + rect.width*0.5f - 2) - halfWidth, y+2, height, outlineColour, pText);
-		MFFont_DrawText(pFont, (rect.x + rect.width*0.5f + 2) - halfWidth, y+2, height, outlineColour, pText);
+		MFFont_DrawText2(pFont, (rect.x + rect.width*0.5f - 2) - halfWidth, y-2, height, outlineColour, pText);
+		MFFont_DrawText2(pFont, (rect.x + rect.width*0.5f + 2) - halfWidth, y-2, height, outlineColour, pText);
+		MFFont_DrawText2(pFont, (rect.x + rect.width*0.5f - 2) - halfWidth, y+2, height, outlineColour, pText);
+		MFFont_DrawText2(pFont, (rect.x + rect.width*0.5f + 2) - halfWidth, y+2, height, outlineColour, pText);
 	}
 
-	MFFont_DrawText(pFont, (rect.x + rect.width*0.5f) - halfWidth, y, height, colour, pText);
+	MFFont_DrawText2(pFont, (rect.x + rect.width*0.5f) - halfWidth, y, height, colour, pText);
 }
 
 float TestControl(dBControlType ctrl, GHControlType type)

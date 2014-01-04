@@ -1,7 +1,7 @@
 #include "FeedBack.h"
-#include "MFDisplay.h"
-#include "MFRenderer.h"
-#include "DebugMenu.h"
+#include "Fuji/MFDisplay.h"
+#include "Fuji/MFRenderer.h"
+#include "Fuji/DebugMenu.h"
 
 #include "Control.h"
 #include "Screens/Editor.h"
@@ -264,30 +264,30 @@ void GameScreen::Draw()
 		trackOffset = ((float)gEditor.measure + (float)gEditor.beat / (float)gEditor.quantisation) * 4.f;
 	else
 		trackOffset = (float)gEditor.offset/gEditor.pSong->GetRes();
-	MFFont_DrawTextf(pText, 10.0f, 10.0f, 20.0f, MFVector::yellow, "%s: %g", MFTranslation_GetString(pStrings, TRACK_POSITION), trackOffset);
+	MFFont_DrawText2f(pText, 10.0f, 10.0f, 20.0f, MFVector::yellow, "%s: %g", MFTranslation_GetString(pStrings, TRACK_POSITION), trackOffset);
 
 	int minutes = (int)(gEditor.playingTime / 60000000);
 	int seconds = (int)((gEditor.playingTime%60000000)/1000000);
 	int milliseconds = (int)((gEditor.playingTime%1000000)/1000);
-	MFFont_DrawTextf(pText, 10.0f, 30.0f, 20.0f, MFVector::yellow, "%s: %02d:%02d.%03d", MFTranslation_GetString(pStrings, TRACK_TIME), minutes, seconds, milliseconds);
-	MFFont_DrawTextf(pText, 10.0f, 50.0f, 20.0f, MFVector::yellow, "%s: 1/%d", MFTranslation_GetString(pStrings, TRACK_STEP), gEditor.quantisation);
+	MFFont_DrawText2f(pText, 10.0f, 30.0f, 20.0f, MFVector::yellow, "%s: %02d:%02d.%03d", MFTranslation_GetString(pStrings, TRACK_TIME), minutes, seconds, milliseconds);
+	MFFont_DrawText2f(pText, 10.0f, 50.0f, 20.0f, MFVector::yellow, "%s: 1/%d", MFTranslation_GetString(pStrings, TRACK_STEP), gEditor.quantisation);
 
-	MFFont_DrawTextf(pText, 10.0f, 80.0f, 20.0f, MFVector::yellow, "%s: %g", MFTranslation_GetString(pStrings, TRACK_BPM), (float)gEditor.currentBPM * 0.001f);
-	MFFont_DrawTextf(pText, 10.0f, 100.0f, 20.0f, MFVector::yellow, "%s: %g", MFTranslation_GetString(pStrings, TRACK_START_OFFSET), GETSECONDS(gEditor.pSong->startOffset));
+	MFFont_DrawText2f(pText, 10.0f, 80.0f, 20.0f, MFVector::yellow, "%s: %g", MFTranslation_GetString(pStrings, TRACK_BPM), (float)gEditor.currentBPM * 0.001f);
+	MFFont_DrawText2f(pText, 10.0f, 100.0f, 20.0f, MFVector::yellow, "%s: %g", MFTranslation_GetString(pStrings, TRACK_START_OFFSET), GETSECONDS(gEditor.pSong->startOffset));
 
 	if(bMetronome || bClaps)
 	{
-		MFFont_DrawTextf(pHeading, 10.0f, 120.0f, 30.0f, MFVector::yellow, "%s%s", bMetronome ? "M" : "", bClaps ? "C" : "");
+		MFFont_DrawText2f(pHeading, 10.0f, 120.0f, 30.0f, MFVector::yellow, "%s%s", bMetronome ? "M" : "", bClaps ? "C" : "");
 
 //		MFMaterial_SetMaterial(gEditor.pMetronome);
 //		MFPrimitive_DrawQuad(10, 90, 64, 64);
 	}
 
 	if(bHalfSpeed)
-		MFFont_DrawTextf(pText, 10.0f, 160.0f, 20.0f, MFVector::yellow, "%s", gSpeedStrings[bHalfSpeed]);
+		MFFont_DrawText2f(pText, 10.0f, 160.0f, 20.0f, MFVector::yellow, "%s", gSpeedStrings[bHalfSpeed]);
 
 	if(gHyperSpeed)
-		MFFont_DrawTextf(pText, 10.0f, 180.0f, 20.0f, MFVector::yellow, "%s: %gx", MFTranslation_GetString(pStrings, TRACK_HYPERSPEED), gHyperSpeedTable[gHyperSpeed]);
+		MFFont_DrawText2f(pText, 10.0f, 180.0f, 20.0f, MFVector::yellow, "%s: %gx", MFTranslation_GetString(pStrings, TRACK_HYPERSPEED), gHyperSpeedTable[gHyperSpeed]);
 
 	MFView_Pop();
 }

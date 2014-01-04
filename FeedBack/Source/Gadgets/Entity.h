@@ -1,8 +1,8 @@
 #if !defined(_ENTITY_H)
 #define _ENTITY_H
 
-#include "MFIni.h"
-#include "MFPtrList.h"
+#include "Fuji/MFIni.h"
+#include "Fuji/MFPtrList.h"
 #include "../Tools/Factory.h"
 #include "../Tools/HashTable.h"
 #include "Action.h"

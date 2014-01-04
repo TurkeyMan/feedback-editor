@@ -1,6 +1,6 @@
 #include "FeedBack.h"
-#include "MFSockets.h"
-#include "MFThread.h"
+#include "Fuji/MFSockets.h"
+#include "Fuji/MFThread.h"
 
 #include "Download.h"
 #include "MainMenu.h"

@@ -3,7 +3,7 @@
 
 #include "Tools/EventSuggestions.h"
 
-#include "MFMaterial.h"
+#include "Fuji/MFMaterial.h"
 #include "Screen.h"
 
 class EditorScreen : public dBScreen

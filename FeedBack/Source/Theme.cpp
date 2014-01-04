@@ -1,5 +1,5 @@
 #include "FeedBack.h"
-#include "MFIni.h"
+#include "Fuji/MFIni.h"
 #include "Theme.h"
 
 void LoadResources(MFIniLine *pLine, dBResourceCache *pResourceCache)
@@ -217,7 +217,7 @@ void dBThemeScreen::Deselect()
 
 dBActionScript *dBThemeScreen::GetAction(const char *pName)
 {
-	for(int a=0; a<actions.size(); ++a)
+	for(size_t a=0; a<actions.size(); ++a)
 	{
 		if(!MFString_Compare(actions[a].pName, pName))
 			return actions[a].pScript;
@@ -227,7 +227,7 @@ dBActionScript *dBThemeScreen::GetAction(const char *pName)
 
 dBActionMetric *dBThemeScreen::GetMetric(const char *pName)
 {
-	for(int a=0; a<metrics.size(); ++a)
+	for(size_t a=0; a<metrics.size(); ++a)
 	{
 		if(!MFString_Compare(metrics[a].pName, pName))
 			return metrics[a].pMetric;

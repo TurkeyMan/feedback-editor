@@ -1,20 +1,20 @@
 #if !defined(_FEEDBACK_H)
 #define _FEEDBACK_H
 
-#include "Fuji.h"
+#include "Fuji/Fuji.h"
 
-#include "MFInput.h"
-#include "MFMaterial.h"
-#include "MFModel.h"
-#include "MFSound.h"
-#include "MFFont.h"
-#include "MFView.h"
-#include "MFDisplay.h"
-#include "MFPrimitive.h"
-#include "MFRenderer.h"
-#include "MFSystem.h"
-#include "MFTranslation.h"
-#include "MFArray.h"
+#include "Fuji/MFInput.h"
+#include "Fuji/MFMaterial.h"
+#include "Fuji/MFModel.h"
+#include "Fuji/MFSound.h"
+#include "Fuji/MFFont.h"
+#include "Fuji/MFView.h"
+#include "Fuji/MFDisplay.h"
+#include "Fuji/MFPrimitive.h"
+#include "Fuji/MFRenderer.h"
+#include "Fuji/MFSystem.h"
+#include "Fuji/MFTranslation.h"
+#include "Fuji/MFArray.h"
 
 #include "Settings.h"
 #include "Song.h"

@@ -1,8 +1,8 @@
 #if !defined(_CONTROL_H)
 #define _CONTROL_H
 
-#include "MFInput.h"
-#include "MFPtrList.h"
+#include "Fuji/MFInput.h"
+#include "Fuji/MFPtrList.h"
 
 class MFIniLine;
 

@@ -1,5 +1,5 @@
 #include "FeedBack.h"
-#include "MFHeap.h"
+#include "Fuji/MFHeap.h"
 #include "Control.h"
 
 ListBoxScreen::ListBoxScreen()
@@ -212,7 +212,7 @@ void ListBoxScreen::Draw()
 		if(hilite)
 			MFPrimitive_DrawUntexturedQuad(x-5, y, w+10, textHeight, MakeVector(0,0,0.5f,1));
 
-		MFFont_DrawText(pText, x, y, textHeight, hilite ? MFVector::yellow : MFVector::white, pI->pString);
+		MFFont_DrawText2(pText, x, y, textHeight, hilite ? MFVector::yellow : MFVector::white, pI->pString);
 		y += textHeight;
 	}
 

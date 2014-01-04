@@ -1,7 +1,7 @@
 #if !defined(_NATIONALITYSCREEN_H)
 #define _NATIONALITYSCREEN_H
 
-#include "MFMaterial.h"
+#include "Fuji/MFMaterial.h"
 #include "Screen.h"
 
 class NationalityScreen : public dBScreen

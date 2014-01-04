@@ -95,7 +95,7 @@ const char *dBEntity::GetProperty(const char *pPropertyName)
 
 void dBEntity::SignalEvent(const char *pEvent, const char *pParams)
 {
-	for(int a=0; a<events.size(); ++a)
+	for(size_t a=0; a<events.size(); ++a)
 	{
 		if(!MFString_CaseCmp(pEvent, events[a].pEvent))
 			pActionManager->RunScript(events[a].pScript, this);

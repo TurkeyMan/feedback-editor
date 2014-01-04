@@ -1,9 +1,9 @@
 #if !defined(_ACTION_H)
 #define _ACTION_H
 
-#include "MFIni.h"
-#include "MFPtrList.h"
-#include "MFObjectPool.h"
+#include "Fuji/MFIni.h"
+#include "Fuji/MFPtrList.h"
+#include "Fuji/MFObjectPool.h"
 #include "../Tools/Factory.h"
 #include "../Tools/HashTable.h"
 

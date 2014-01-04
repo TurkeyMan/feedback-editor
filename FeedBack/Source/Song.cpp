@@ -1,13 +1,13 @@
 #include "FeedBack.h"
-#include "MFFileSystem.h"
-#include "MFView.h"
-#include "MFInput.h"
-#include "MFPrimitive.h"
-#include "MFHeap.h"
-#include "MFSound.h"
-#include "FileSystem/MFFileSystemNative.h"
-#include "MFIni.h"
-#include "DebugMenu.h"
+#include "Fuji/MFFileSystem.h"
+#include "Fuji/MFView.h"
+#include "Fuji/MFInput.h"
+#include "Fuji/MFPrimitive.h"
+#include "Fuji/MFHeap.h"
+#include "Fuji/MFSound.h"
+#include "Fuji/FileSystem/MFFileSystemNative.h"
+#include "Fuji/MFIni.h"
+#include "Fuji/DebugMenu.h"
 
 #include "MidiFile.h"
 
@@ -158,7 +158,7 @@ dBChart::~dBChart()
 	if(pBass)
 		MFSound_DestroyStream(pBass);
 	if(pFretboard)
-		MFMaterial_Destroy(pFretboard);
+		MFMaterial_Release(pFretboard);
 }
 
 const char *dBChart::GetDifficultyName(int difficulty)

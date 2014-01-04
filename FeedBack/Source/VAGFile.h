@@ -1,7 +1,7 @@
 #if !defined(_VAGFILE_H)
 #define _VAGFILE_H
 
-#include "MFSound.h"
+#include "Fuji/MFSound.h"
 
 struct TrackInfo
 {

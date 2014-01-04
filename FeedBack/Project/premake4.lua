@@ -5,7 +5,7 @@ solution "FeedBack"
 	platforms { "Native", "x32", "x64" }
 
 	-- include the fuji project...
-	dofile  "../../../Fuji/Fuji/Private/Project/fujiproj.lua"
+	dofile  "../../../Fuji/Fuji/Project/fujiproj.lua"
 
 	project "FeedBack"
 		kind "WindowedApp"
@@ -19,9 +19,6 @@ solution "FeedBack"
 
 		flags { "StaticRuntime", "NoExceptions", "NoRTTI", "WinMain" }
 
---		pchheader "Warlords.h"
---		pchsource "Warlords.cpp"
-
 		links { "Fuji" }
 
-		dofile "../../../Fuji/Fuji/Public/Project/fujiconfig.lua"
+		dofile "../../../Fuji/dist/Project/fujiconfig.lua"

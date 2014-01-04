@@ -1,7 +1,7 @@
 #include "FeedBack.h"
-#include "MFFileSystem.h"
-#include "MFHeap.h"
-#include "MFTexture.h"
+#include "Fuji/MFFileSystem.h"
+#include "Fuji/MFHeap.h"
+#include "Fuji/MFTexture.h"
 
 #if !defined(MAKE_LEGAL)
 
@@ -161,7 +161,7 @@ MFMaterial *LoadMaterialFromGHArchive(GHArchive *pArchive, const char *pFilename
 	// create the material
     MFTexture *pTexture = MFTexture_CreateFromRawData(pFilename, pImageBuffer, pTex->width, pTex->height, TexFmt_A8R8G8B8, TEX_CopyMemory, true);
 	MFMaterial *pMat = MFMaterial_Create(pFilename);
-	MFTexture_Destroy(pTexture);
+	MFTexture_Release(pTexture);
 	MFHeap_Free(pImageBuffer);
 
 	return pMat;

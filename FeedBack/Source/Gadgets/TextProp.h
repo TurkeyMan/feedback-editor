@@ -2,7 +2,7 @@
 #define _TEXTPROP_H
 
 #include "Entity.h"
-#include "MFFont.h"
+#include "Fuji/MFFont.h"
 
 class dBTextProp : public dBEntity
 {

@@ -1,8 +1,8 @@
 #include "FeedBack.h"
 #include "Control.h"
 
-#include "MFTexture.h"
-#include "Materials/MFMat_Standard.h"
+#include "Fuji/MFTexture.h"
+#include "Fuji/Materials/MFMat_Standard.h"
 
 HelpScreen::HelpScreen()
 {
@@ -45,7 +45,7 @@ void HelpScreen::Draw()
 
 	uintp old = MFMaterial_GetParameterI(pMat, MFMatStandard_ZRead, 0);
 	MFMaterial_SetParameterI(pMat, MFMatStandard_ZRead, 0, 0);
-	MFPrimitive_DrawUntexturedQuad(MakeVector(40, 75, 0.1f), MakeVector(640-40, 480-70, 0.1f), MakeVector(0,0,0,1));
+	MFPrimitive_DrawUntexturedQuadV(MakeVector(40, 75, 0.1f), MakeVector(640-40, 480-70, 0.1f), MakeVector(0,0,0,1));
 	MFMaterial_SetParameterI(pMat, MFMatStandard_ZRead, 0, old);
 
 	float height = HELP_TEXT_HEIGHT;

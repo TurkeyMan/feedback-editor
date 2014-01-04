@@ -1,7 +1,7 @@
-#include "Fuji.h"
-#include "MFFileSystem.h"
-#include "MFHeap.h"
-#include "MFSound.h"
+#include "Fuji/Fuji.h"
+#include "Fuji/MFFileSystem.h"
+#include "Fuji/MFHeap.h"
+#include "Fuji/MFSound.h"
 
 #include "FeedBack.h"
 

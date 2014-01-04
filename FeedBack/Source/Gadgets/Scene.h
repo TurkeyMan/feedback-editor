@@ -1,7 +1,7 @@
 #if !defined(_SCENE_H)
 #define _SCENE_H
 
-#include "MFPtrList.h"
+#include "Fuji/MFPtrList.h"
 #include "Entity.h"
 
 class dBScene

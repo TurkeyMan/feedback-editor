@@ -2,7 +2,7 @@
 #define _MODELPROP_H
 
 #include "Entity.h"
-#include "MFModel.h"
+#include "Fuji/MFModel.h"
 
 class dBModelProp : public dBEntity
 {

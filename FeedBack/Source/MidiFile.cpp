@@ -1,6 +1,6 @@
 #include "FeedBack.h"
-#include "MFFileSystem.h"
-#include "MFHeap.h"
+#include "Fuji/MFFileSystem.h"
+#include "Fuji/MFHeap.h"
 
 #include "MidiFile.h"
 

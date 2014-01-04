@@ -1,7 +1,7 @@
 #if !defined(_MAINMENUSCREEN_H)
 #define _MAINMENUSCREEN_H
 
-#include "MFMaterial.h"
+#include "Fuji/MFMaterial.h"
 #include "Screen.h"
 
 class MainMenuScreen : public dBScreen

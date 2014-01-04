@@ -1,9 +1,9 @@
 #include "FeedBack.h"
-#include "MFFileSystem.h"
-#include "MFTexture.h"
-#include "MFMaterial.h"
-#include "MFModel.h"
-#include "DebugMenu.h"
+#include "Fuji/MFFileSystem.h"
+#include "Fuji/MFTexture.h"
+#include "Fuji/MFMaterial.h"
+#include "Fuji/MFModel.h"
+#include "Fuji/DebugMenu.h"
 #include "Track.h"
 
 #include "Screens/Editor.h"
@@ -34,7 +34,7 @@ void DrawRing(float x, float z, float size, bool dark = false)
 {
 	MFPrimitive(PT_TriStrip, 0);
 	MFBegin(4);
-	MFSetColour(MFVector::white * (dark ? 0.6f : 1.0f));
+	MFSetColourV(MFVector::white * (dark ? 0.6f : 1.0f));
 	MFSetTexCoord1(0.0f, 0.0f);
 	MFSetPosition(x, z, size*0.5f);
 	MFSetTexCoord1(1.0f, 0.0f);
@@ -53,7 +53,7 @@ Fretboard::Fretboard()
 	// create materials
 	MFTexture *pFretTex = MFTexture_CreateBlank("frets", MFVector::one);
 	pFrets = MFMaterial_Create("frets");
-	MFTexture_Destroy(pFretTex);
+	MFTexture_Release(pFretTex);
 
 	int zRead = MFMaterial_GetParameterIndexFromName(pFrets, "zread");
 	int zWrite = MFMaterial_GetParameterIndexFromName(pFrets, "zwrite");
@@ -126,20 +126,20 @@ Fretboard::~Fretboard()
 	MFModel_Destroy(pButton);
 
 	// clean up materials
-	MFMaterial_Destroy(pEdge);
-	MFMaterial_Destroy(pBar);
+	MFMaterial_Release(pEdge);
+	MFMaterial_Release(pBar);
 
-	MFMaterial_Destroy(pFrets);
-	MFMaterial_Destroy(pRing);
+	MFMaterial_Release(pFrets);
+	MFMaterial_Release(pRing);
 
 	for(int a=0; a<5; ++a)
 	{
-		MFMaterial_Destroy(pColourRing[a]);
-		MFMaterial_Destroy(pButtonMat[a]);
-		MFMaterial_Destroy(pButtonRing[a]);
+		MFMaterial_Release(pColourRing[a]);
+		MFMaterial_Release(pButtonMat[a]);
+		MFMaterial_Release(pButtonRing[a]);
 	}
 
-	MFMaterial_Destroy(pFretboard);
+	MFMaterial_Release(pFretboard);
 }
 
 void Fretboard::Draw(float time, dBChart *pSong, int track)
@@ -229,7 +229,7 @@ void Fretboard::Draw(float time, dBChart *pSong, int track)
 
 	// draw the fretboard...
 	MFBegin(((end-start) / 4) * 2 + 2);
-	MFSetColour(MFVector::white);
+	MFSetColourV(MFVector::white);
 
 	float halfFB = fretboardWidth*0.5f;
 
@@ -319,7 +319,7 @@ void Fretboard::Draw(float time, dBChart *pSong, int track)
 
 		MFSetPosition(-halfFB + columnWidth*(float)col + 0.02f, 0.0f, (float)start);
 	}
-	MFSetColour(MFVector::white);
+	MFSetColourV(MFVector::white);
 	MFSetPosition(-halfFB - 0.1f, 0.0f, (float)end);
 
 	MFSetTexCoord1(0,0);
@@ -377,9 +377,9 @@ void Fretboard::Draw(float time, dBChart *pSong, int track)
 		float position = (fretTime - time) * scrollSpeed;
 
 		if(!halfBeat)
-			MFSetColour(MFVector::white);
+			MFSetColourV(MFVector::white);
 		else
-			MFSetColour(MakeVector(1,1,1,0.3f));
+			MFSetColourV(MakeVector(1,1,1,0.3f));
 		MFSetTexCoord1(0,0);
 		MFSetPosition(-halfFB, 0.0f, position + bw);
 		MFSetTexCoord1(1,0);
@@ -444,7 +444,7 @@ void Fretboard::Draw(float time, dBChart *pSong, int track)
 						if(position < 0.0f)
 						{
 							MFBegin(4);
-							MFSetColour(gColours[key]);
+							MFSetColourV(gColours[key]);
 							MFSetPosition(xoffset - 0.2f, 0.0f, MFMin(whammyTop, 0.0f));
 							MFSetPosition(xoffset + 0.2f, 0.0f, MFMin(whammyTop, 0.0f));
 							MFSetPosition(xoffset - 0.2f, 0.0f, position);
@@ -457,7 +457,7 @@ void Fretboard::Draw(float time, dBChart *pSong, int track)
 					{
 						// this half could have waves cruising down it if we wanted to support the whammy...
 						MFBegin(4);
-						MFSetColour(gColours[key]);
+						MFSetColourV(gColours[key]);
 						MFSetPosition(xoffset - 0.2f, 0.0f, MFMin(whammyTop, (float)end));
 						MFSetPosition(xoffset + 0.2f, 0.0f, MFMin(whammyTop, (float)end));
 						MFSetPosition(xoffset - 0.2f, 0.0f, MFMax(position, 0.0f));
@@ -517,7 +517,7 @@ void Fretboard::Draw(float time, dBChart *pSong, int track)
 
 				MFPrimitive(PT_TriStrip, 0);
 				MFBegin(4);
-				MFSetColour(specialColours[key]);
+				MFSetColourV(specialColours[key]);
 				MFSetPosition(specialX[key], 0.0f, MFMin(top, (float)end));
 				MFSetPosition(specialX[key]+specialWidth[key], 0.0f, MFMin(top, (float)end));
 				MFSetPosition(specialX[key], 0.0f, MFMax(bottom, (float)start));
@@ -706,7 +706,7 @@ void Fretboard::Draw(float time, dBChart *pSong, int track)
 void Fretboard::LoadFretboard(const char *pImage)
 {
 	if(pFretboard)
-		MFMaterial_Destroy(pFretboard);
+		MFMaterial_Release(pFretboard);
 
 	pFretboard = MFMaterial_Create(MFStr("Fretboards/%s", pImage));
 

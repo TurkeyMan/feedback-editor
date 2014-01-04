@@ -1,5 +1,5 @@
 #include "FeedBack.h"
-#include "MFStringCache.h"
+#include "Fuji/MFStringCache.h"
 
 #include "Action.h"
 #include "Entity.h"
@@ -388,7 +388,7 @@ void *dBActionManager::Lex(const char *pAction, int *pNumTokens, int preBytes)
 				pStringCache = pNew;
 
 				int64 difference = (int64)(size_t)pNewPtr - (int64)(size_t)pOldPtr;
-				for(int a=0; a<tokens.size(); ++a)
+				for(size_t a=0; a<tokens.size(); ++a)
 					tokens[a].pToken = (const char*)((size_t)tokens[a].pToken + difference);
 			}
 		}
@@ -406,7 +406,7 @@ void *dBActionManager::Lex(const char *pAction, int *pNumTokens, int preBytes)
 		dBActionScript_Token *pTokens = (dBActionScript_Token*)((char*)pData + preBytes);
 
 		// copy tokens
-		MFCopyMemory(pTokens, tokens.getpointer(), sizeof(dBActionScript_Token) * numTokens);
+		MFCopyMemory(pTokens, tokens.getPointer(), sizeof(dBActionScript_Token) * numTokens);
 
 		// copy strings
 		const char *pCacheStrings = MFStringCache_GetCache(pStringCache);

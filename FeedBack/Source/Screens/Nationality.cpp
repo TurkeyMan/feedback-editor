@@ -1,5 +1,5 @@
 #include "FeedBack.h"
-#include "MFFileSystem.h"
+#include "Fuji/MFFileSystem.h"
 #include "Screen.h"
 #include "Nationality.h"
 
@@ -37,7 +37,7 @@ NationalityScreen::NationalityScreen()
 
 NationalityScreen::~NationalityScreen()
 {
-	MFMaterial_Destroy(pFlags);
+	MFMaterial_Release(pFlags);
 	MFFont_Destroy(pFont);
 }
 
