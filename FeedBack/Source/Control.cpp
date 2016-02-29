@@ -513,7 +513,7 @@ bool GHControlUnit::Test(uint32 mods, GHControlType type)
 				if(frameCount != fc)
 				{
 					frameCount = fc;
-					timeout2 -= MFSystem_TimeDelta();
+					timeout2 -= MFSystem_GetTimeDelta();
 				}
 
 				if(timeout2 <= 0.0f)
@@ -570,7 +570,7 @@ bool GHControlUnit::Test(uint32 mods, GHControlType type)
 				if(frameCount != fc)
 				{
 					frameCount = fc;
-					timeout -= MFSystem_TimeDelta();
+					timeout -= MFSystem_GetTimeDelta();
 				}
 
 				if(timeout <= 0.0f)

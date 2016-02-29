@@ -159,7 +159,7 @@ void GotoSection(int cancel, const char *pString)
 	}
 
 	// find section by name
-	int len = MFString_Length(pString);
+	size_t len = MFString_Length(pString);
 
 	GHEvent *pSE = gEditor.pSong->events.First();
 

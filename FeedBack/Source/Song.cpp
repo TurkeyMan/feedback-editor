@@ -230,7 +230,7 @@ dBChart *dBChart::LoadChart(const char *pSong)
 	pNew->resolution = 192;
 
 	// check for a matching song file
-	uint32 size;
+	size_t size;
 	char *pChart = MFFileSystem_Load(MFStr("%s.chart", pSong), &size);
 	if(pChart)
 	{
@@ -511,7 +511,7 @@ dBChart *dBChart::LoadChart(const char *pSong)
 #include <stdio.h>
 void WriteString(const char *pString, FILE *pFile)
 {
-	int len = MFString_Length(pString);
+	size_t len = MFString_Length(pString);
 	fwrite(pString, len, 1, pFile);
 }
 

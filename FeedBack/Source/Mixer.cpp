@@ -72,9 +72,9 @@ void Mixer::Draw()
 	MFView_Push();
 
 	MFRect rect;
-	rect.x = MFDisplay_IsWidescreen() ? -106.0f : 0.0f;
+	rect.x = (MFDisplay_GetAspectRatio() >= 1.5) ? -106.0f : 0.0f;
 	rect.y = 0.0f;
-	rect.width = MFDisplay_IsWidescreen() ? 852.0f : 640.0f;
+	rect.width = (MFDisplay_GetAspectRatio() >= 1.5) ? 852.0f : 640.0f;
 	rect.height = 480.0f;
 	MFView_SetOrtho(&rect);
 
@@ -127,7 +127,7 @@ void MixerControl::Update()
 	{
 		if(pLevel)
 		{
-			*pLevel -= (type == 0 ? 1.0f : 2.0f) * MFSystem_TimeDelta();
+			*pLevel -= (type == 0 ? 1.0f : 2.0f) * MFSystem_GetTimeDelta();
 			*pLevel = MFMax(*pLevel, type == 0 ? 0.0f : -1.0f);
 		}
 	}
@@ -135,7 +135,7 @@ void MixerControl::Update()
 	{
 		if(pLevel)
 		{
-			*pLevel += (type == 0 ? 1.0f : 2.0f) * MFSystem_TimeDelta();
+			*pLevel += (type == 0 ? 1.0f : 2.0f) * MFSystem_GetTimeDelta();
 			*pLevel = MFMin(*pLevel, 1.0f);
 		}
 	}

@@ -38,7 +38,7 @@ void FileSelectorScreen::Show(const char *pMessage, const char *pPath, const cha
 	pCompleteCallback = pCallback;
 
 	// make sure path ends with a slash
-	int len = MFString_Length(path);
+	size_t len = MFString_Length(path);
 	if(len && path[len-1] != ':' && path[len-1] != '/' && path[len-1] != '\\')
 		path[len] = '/', path[len+1] = 0;
 
@@ -209,7 +209,7 @@ void FileSelectorScreen::UpdateInput()
 	}
 	else if(TestControl(dBCtrl_Menu_End, GHCT_Delay))
 	{
-		selected = items.size()-1;
+		selected = (int)(items.size()-1);
 		listOffset = MFMax(listOffset, selected-(pageMax-1));
 	}
 	else if(TestControl(dBCtrl_Menu_PgUp, GHCT_Delay))
@@ -251,7 +251,7 @@ void FileSelectorScreen::UpdateInput()
 	if(pressed)
 	{
 		// append keystroke
-		int len = MFString_Length(typeBuffer);
+		size_t len = MFString_Length(typeBuffer);
 		if(len < 255)
 		{
 			typeBuffer[len++] = pressed;
@@ -263,7 +263,7 @@ void FileSelectorScreen::UpdateInput()
 			{
 				if(!MFString_CaseCmpN(typeBuffer, items[a].filename, len))
 				{
-					selected = a;
+					selected = (int)a;
 					listOffset = MFClamp(selected-(pageMax-1), listOffset, selected);
 					break;
 				}
@@ -272,7 +272,7 @@ void FileSelectorScreen::UpdateInput()
 	}
 	else if(typeTimeout > 0.0f)
 	{
-		typeTimeout -= MFSystem_TimeDelta();
+		typeTimeout -= MFSystem_GetTimeDelta();
 		if(typeTimeout <= 0.0f)
 			typeBuffer[0] = 0;
 	}
@@ -285,9 +285,9 @@ void FileSelectorScreen::Draw()
 	MFView_Push();
 
 	MFRect rect;
-	rect.x = MFDisplay_IsWidescreen() ? -106.0f : 0.0f;
+	rect.x = (MFDisplay_GetAspectRatio() >= 1.5) ? -106.0f : 0.0f;
 	rect.y = 0.0f;
-	rect.width = MFDisplay_IsWidescreen() ? 852.0f : 640.0f;
+	rect.width = (MFDisplay_GetAspectRatio() >= 1.5) ? 852.0f : 640.0f;
 	rect.height = 480.0f;
 	MFView_SetOrtho(&rect);
 

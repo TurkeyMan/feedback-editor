@@ -128,7 +128,7 @@ void EditorScreen::Draw()
 {
 	GHScreen::DrawScreens();	
 
-	MFRenderer_ClearScreen(CS_ZBuffer);
+	MFRenderer_ClearScreen(MFRCF_Depth);
 
 	MFMatrix mat;
 	mat.LookAt(MakeVector(2.0,1.5,-1.0), MakeVector(1.0,0.3f,1.0f));

@@ -30,9 +30,9 @@ void HelpScreen::Draw()
 	MFView_Push();
 
 	MFRect rect;
-	rect.x = MFDisplay_IsWidescreen() ? -106.0f : 0.0f;
+	rect.x = (MFDisplay_GetAspectRatio() >= 1.5) ? -106.0f : 0.0f;
 	rect.y = 0.0f;
-	rect.width = MFDisplay_IsWidescreen() ? 852.0f : 640.0f;
+	rect.width = (MFDisplay_GetAspectRatio() >= 1.5) ? 852.0f : 640.0f;
 	rect.height = 480.0f;
 	MFView_SetOrtho(&rect);
 
@@ -65,11 +65,11 @@ void HelpScreen::Draw()
 	static float yOffset = 0.0f;
 	if(TestControl(dBCtrl_Menu_Up, GHCT_Hold))
 	{
-		yOffset = MFMax(yOffset - MFSystem_TimeDelta() * 500.0f, 0.0f);
+		yOffset = MFMax(yOffset - MFSystem_GetTimeDelta() * 500.0f, 0.0f);
 	}
 	if(TestControl(dBCtrl_Menu_Down, GHCT_Hold))
 	{
-		yOffset = MFMin(yOffset + MFSystem_TimeDelta() * 500.0f, MFMax(totalHeight - boxHeight, 0.0f));
+		yOffset = MFMin(yOffset + MFSystem_GetTimeDelta() * 500.0f, MFMax(totalHeight - boxHeight, 0.0f));
 	}
 
 	// draw scrollbar

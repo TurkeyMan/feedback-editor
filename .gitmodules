@@ -1,0 +1,3 @@
+[submodule "Fuji"]
+	path = Fuji
+	url = git@github.com:TurkeyMan/fuji.git

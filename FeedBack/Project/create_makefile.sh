@@ -1,1 +1,1 @@
-bin/premake4 gmake
+../../Fuji/dist/bin/premake5 gmake

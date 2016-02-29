@@ -27,7 +27,7 @@ static int gFlags[] =
 
 NationalityScreen::NationalityScreen()
 {
-	language = MFTranslation_GetDefaultLanguage();
+	language = MFTranslation_GetSystemLanguage();
 
 	pFlags = MFMaterial_Create("flags");
 	pFont = MFFont_Create("Blzee");
@@ -38,7 +38,7 @@ NationalityScreen::NationalityScreen()
 NationalityScreen::~NationalityScreen()
 {
 	MFMaterial_Release(pFlags);
-	MFFont_Destroy(pFont);
+	MFFont_Release(pFont);
 }
 
 void NationalityScreen::Select()
@@ -80,7 +80,7 @@ int NationalityScreen::Update()
 
 	float targetY = (float)language * fontHeight;
 
-	float direction = (targetY - yOffset) * 4.0f * MFSystem_TimeDelta();
+	float direction = (targetY - yOffset) * 4.0f * MFSystem_GetTimeDelta();
 	yOffset += direction;
 
 	if(direction < 0.0f && yOffset < targetY)
@@ -100,7 +100,7 @@ void NationalityScreen::Draw()
 	MFView_Push();
 
 	MFRect rect;
-	float width = 480.0f * MFDisplay_GetNativeAspectRatio();
+	float width = 480.0f * MFDisplay_GetAspectRatio();
 	float overflow = width - 640.0f;
 	rect.x = -overflow * 0.5f;
 	rect.y = 0.0f;

@@ -236,7 +236,7 @@ void GameScreen::Draw()
 		MFView_Push();
 		MFView_SetOrtho(&rect);
 
-		MFRenderer_SetViewport(&rect);
+		MFView_SetViewport(&rect);
 		pTrack->Draw(currentTime, gEditor.pSong, gEditor.currentStream[0]);
 
 		int difficulty = gEditor.currentStream[0] / GHS_NumTracks;
@@ -244,14 +244,14 @@ void GameScreen::Draw()
 		CenterText(10.0f, gEditor.selectedStream == 0 ? 40.0f : 30.0f, gEditor.selectedStream == 0 ? MFVector::red : MFVector::white, MFStr("%s - %s", gEditor.pSong->GetDifficultyName(difficulty), gEditor.pSong->GetTrackName(track)), pHeading, false);
 
 		rect.x += rect.width;
-		MFRenderer_SetViewport(&rect);
+		MFView_SetViewport(&rect);
 		pTrack2->Draw(currentTime, gEditor.pSong, gEditor.currentStream[1]);
 
 		difficulty = gEditor.currentStream[1] / GHS_NumTracks;
 		track = gEditor.currentStream[1] % GHS_NumTracks;
 		CenterText(10.0f, gEditor.selectedStream == 1 ? 40.0f : 30.0f, gEditor.selectedStream == 1 ? MFVector::red : MFVector::white, MFStr("%s - %s", gEditor.pSong->GetDifficultyName(difficulty), gEditor.pSong->GetTrackName(track)), pHeading, false);
 
-		MFRenderer_ResetViewport();
+		MFView_SetViewport(nullptr);
 
 		MFView_Pop();
 	}

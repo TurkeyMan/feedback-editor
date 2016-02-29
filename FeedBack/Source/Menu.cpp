@@ -5,8 +5,6 @@
 
 #include "Screens/Editor.h"
 
-extern int gQuit;
-
 void MenuScreen::Update()
 {
 
@@ -25,9 +23,9 @@ void MenuScreen::Draw()
 	MFView_Push();
 
 	MFRect rect;
-	rect.x = MFDisplay_IsWidescreen() ? -106.0f : 0.0f;
+	rect.x = (MFDisplay_GetAspectRatio() >= 1.5) ? -106.0f : 0.0f;
 	rect.y = 0.0f;
-	rect.width = MFDisplay_IsWidescreen() ? 852.0f : 640.0f;
+	rect.width = (MFDisplay_GetAspectRatio() >= 1.5) ? 852.0f : 640.0f;
 	rect.height = 480.0f;
 	MFView_SetOrtho(&rect);
 
@@ -71,7 +69,7 @@ void ScanFolder(const char *pFindPattern, const char *pExtention, const char *pP
 
 	if(pFind)
 	{
-		int extLen = MFString_Length(pExtention);
+		size_t extLen = MFString_Length(pExtention);
 
 		while(pFind && more)
 		{
@@ -83,7 +81,7 @@ void ScanFolder(const char *pFindPattern, const char *pExtention, const char *pP
 				}
 				else
 				{
-					int len = MFString_Length(fd.pFilename);
+					size_t len = MFString_Length(fd.pFilename);
 
 					if(len >= extLen && !MFString_CaseCmp(fd.pFilename + len - extLen, pExtention))
 					{
@@ -176,7 +174,7 @@ void MenuScreen::ListCallback(int cancel, int listID, const char *pString, void 
 		case 6:
 			// offer to save...
 
-			gQuit = 1;
+			MFSystem_Quit();
 			break;
 	}
 }
@@ -453,7 +451,7 @@ void MenuScreen::SetMusicCallback(int cancel, const char *pFilename, const char 
 
 			// skip past song path
 			const char *pSongPath = MFStr_GetFilePath(gEditor.pSong->songPath);
-			int len = MFString_Length(pSongPath);
+			size_t len = MFString_Length(pSongPath);
 			if(!MFString_CompareN(pPath, pSongPath, len))
 				pPath += len;
 

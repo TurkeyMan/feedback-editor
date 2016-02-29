@@ -2,10 +2,10 @@ solution "FeedBack"
 	configurations { "Debug", "DebugOpt", "Release", "Retail" }
 --	platforms { "Native", "x32", "x64", "Xbox360", "PS3" }
 --	platforms { "Native", "Xbox" }
-	platforms { "Native", "x32", "x64" }
+	platforms { "x64" }
 
 	-- include the fuji project...
-	dofile  "../../../Fuji/Fuji/Project/fujiproj.lua"
+	dofile  "../../Fuji/Fuji/Project/fujiproj.lua"
 
 	project "FeedBack"
 		kind "WindowedApp"
@@ -21,4 +21,7 @@ solution "FeedBack"
 
 		links { "Fuji" }
 
-		dofile "../../../Fuji/dist/Project/fujiconfig.lua"
+		dofile "../../Fuji/dist/Project/fujiconfig.lua"
+
+		configuration { "windows" }
+			links { "FujiMiddleware.lib" }

@@ -55,7 +55,7 @@ dBTextProp::dBTextProp()
 dBTextProp::~dBTextProp()
 {
 	if(pFont)
-		MFFont_Destroy(pFont);
+		MFFont_Release(pFont);
 }
 
 void dBTextProp::Update()

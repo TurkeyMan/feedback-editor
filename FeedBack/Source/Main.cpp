@@ -26,6 +26,9 @@
 
 MFSystemCallbackFunction pInitFujiFS = NULL;
 
+MFRenderer *pRenderer = NULL;
+MFStateBlock *pDefaultStates = NULL;
+
 dBTheme *gpTheme = NULL;
 
 MFFont *pHeading = NULL;
@@ -256,7 +259,7 @@ void Game_Init()
 	MFCALLSTACK;
 
 	// create debug menu items
-	DebugMenu_AddMenu("Guitar Hero", DebugMenu_GetRootMenu());
+	DebugMenu_AddMenuTo("Guitar Hero", DebugMenu_GetRootMenu());
 	DebugMenu_AddItem("Show note times", "Guitar Hero", &bRenderNoteTimes);
 	DebugMenu_AddItem("Show halfFrets", "Guitar Hero", &bHalfFrets);
 	DebugMenu_AddItem("Metronome", "Guitar Hero", &bMetronome);
@@ -284,6 +287,22 @@ void Game_Init()
 	mountData.pMountpoint = "packages";
 	mountData.pPath = MFFile_SystemPath("Packages/");
 	MFFileSystem_Mount(hNative, &mountData);
+
+	// create the renderer with a single layer that clears before rendering
+	MFRenderLayerDescription layers[] = { { "Scene" } };
+	pRenderer = MFRenderer_Create(layers, 1, NULL, NULL);
+	MFRenderer_SetCurrent(pRenderer);
+
+	pDefaultStates = MFStateBlock_CreateDefault();
+	MFRenderer_SetGlobalStateBlock(pRenderer, pDefaultStates);
+
+	MFRenderLayer *pLayer = MFRenderer_GetLayer(pRenderer, 0);
+	MFRenderLayer_SetClear(pLayer, MFRCF_All, MakeVector(0.f, 0.f, 0.2f, 1.f));
+
+	MFRenderLayerSet layerSet;
+	MFZeroMemory(&layerSet, sizeof(layerSet));
+	layerSet.pSolidLayer = pLayer;
+	MFRenderer_SetRenderLayerSet(pRenderer, &layerSet);
 
 	// iterate themes directory to build a list of themes...
 	ScanForThemes("game:Themes/");
@@ -357,8 +376,7 @@ void Game_Draw()
 	MFCALLSTACKc;
 
 	// Clear Screen.
-	MFRenderer_SetClearColour(0, 0, 0, 0);
-	MFRenderer_ClearScreen();
+	MFRenderer_ClearScreen(MFRCF_All, MFVector::zero);
 
 	dBScreen::DrawScreen();
 }
@@ -376,9 +394,11 @@ void Game_Deinit()
 	dBEntityManager::DeinitManager();
 
 	// clean up fonts
-	MFFont_Destroy(pHeading);
-	MFFont_Destroy(pText);
-//	MFFont_Destroy(pFancy);
+	MFFont_Release(pHeading);
+	MFFont_Release(pText);
+//	MFFont_Release(pFancy);
+
+	MFRenderer_Destroy(pRenderer);
 
 	DebugMenu_DestroyMenu("Guitar Hero");
 }
@@ -413,10 +433,13 @@ int GameMain(MFInitParams *pInitParams)
 //	gDefaults.input.useDirectInputKeyboard = false;
 	gDefaults.input.useXInput = false;
 //	gDefaults.system.threadPriority = MFPriority_AboveNormal;
-	gDefaults.display.pWindowTitle = "FeedBack Chart Editor v0.96b";
 #if defined(_WINDOWS)
 	gDefaults.display.pIcon = MAKEINTRESOURCE(IDI_ICON1);
 #endif
+
+	pInitParams->pAppTitle = "FeedBack Chart Editor v0.10.0-beta";
+
+	Fuji_CreateEngineInstance();
 
 	MFSystem_RegisterSystemCallback(MFCB_InitDone, Game_Init);
 	MFSystem_RegisterSystemCallback(MFCB_Update, Game_Update);
@@ -425,7 +448,11 @@ int GameMain(MFInitParams *pInitParams)
 
 	pInitFujiFS = MFSystem_RegisterSystemCallback(MFCB_FileSystemInit, Game_InitFilesystem);
 
-	return MFMain(pInitParams);
+	int r = MFMain(pInitParams);
+
+	Fuji_DestroyEngineInstance();
+
+	return r;
 }
 
 #if defined(MF_WINDOWS) || defined(_WINDOWS)
@@ -434,7 +461,6 @@ int GameMain(MFInitParams *pInitParams)
 int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrev, LPSTR lpCmdLine, int nCmdShow)
 {
 	MFInitParams initParams;
-	MFZeroMemory(&initParams, sizeof(MFInitParams));
 	initParams.hInstance = hInstance;
 	initParams.pCommandLine = lpCmdLine;
 
@@ -447,7 +473,6 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrev, LPSTR lpCmdLine, int
 int main(int argc, char *argv[])
 {
 	MFInitParams initParams;
-	MFZeroMemory(&initParams, sizeof(MFInitParams));
 	initParams.argc = argc;
 	initParams.argv = argv;
 
@@ -462,11 +487,20 @@ int main(int argc, char *argv[])
 int main(int argc, char *argv[])
 {
 	MFInitParams initParams;
-	MFZeroMemory(&initParams, sizeof(MFInitParams));
 	initParams.argc = argc;
 	initParams.argv = (const char**)argv;
 
 	return GameMain(&initParams);
 }
 
+#endif
+
+// HAX for vs2015!
+#if _MSC_VER >= 1900
+#include <stdio.h>
+FILE _iob[] = { *stdin, *stdout, *stderr };
+extern "C" FILE * __cdecl __iob_func(void)
+{
+	return _iob;
+}
 #endif

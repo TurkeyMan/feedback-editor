@@ -1,6 +1,6 @@
 #include "FeedBack.h"
 #include "Scene.h"
-#include "Fuji/Util/F3D.h"
+#include "Fuji/Asset/Util/F3D.h"
 
 #include "ModelProp.h"
 

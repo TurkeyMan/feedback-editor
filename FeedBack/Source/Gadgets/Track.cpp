@@ -51,7 +51,9 @@ Fretboard::Fretboard()
 	pFretboard = NULL;
 
 	// create materials
-	MFTexture *pFretTex = MFTexture_CreateBlank("frets", MFVector::one);
+	MFTexture *pFretTex = MFTexture_Find("frets");
+	if(!pFretTex)
+		pFretTex = MFTexture_CreateBlank("frets", MFVector::one);
 	pFrets = MFMaterial_Create("frets");
 	MFTexture_Release(pFretTex);
 
@@ -123,7 +125,7 @@ Fretboard::Fretboard()
 Fretboard::~Fretboard()
 {
 	// clean up models
-	MFModel_Destroy(pButton);
+	MFModel_Release(pButton);
 
 	// clean up materials
 	MFMaterial_Release(pEdge);
@@ -149,7 +151,7 @@ void Fretboard::Draw(float time, dBChart *pSong, int track)
 	MFView_Push();
 
 	MFRect rect;
-	MFRenderer_GetViewport(&rect);
+	MFView_GetViewport(&rect);
 
 	float aspect = rect.width / rect.height;
 	aspect = MFClamp(0.82f, aspect, 2.0f);
@@ -472,11 +474,13 @@ void Fretboard::Draw(float time, dBChart *pSong, int track)
 					mat.SetScale(MakeVector(0.5f/20, 0.5f/20, 0.5f/20));
 					mat.Translate(MakeVector(xoffset, 0.03f, position));
 					MFModel_SetWorldMatrix(pButton, mat);
-					MFModel_SetColour(pButton, pEv->played == -1 ? MakeVector(0.3f, 0.3f, 0.3f, 1.0f) : MFVector::white);
-//					MFModel_SetColour(pButton, position < 0.0f ? MakeVector(0.3f, 0.3f, 0.3f, 1.0f) : MFVector::white);
 
-					MFRenderer_SetRenderStateOverride(MFRS_MaterialOverride, (uint32&)(tap ? pButtonMat[key] : pButtonRing[key]));
-					MFModel_Draw(pButton);
+					MFStateBlock *pSB = MFStateBlock_CreateTemporary(64);
+					MFStateBlock_SetVector(pSB, MFSCV_DiffuseColour, pEv->played == -1 ? MakeVector(0.3f, 0.3f, 0.3f, 1.0f) : MFVector::white);
+//					MFStateBlock_SetVector(pSB, MFSCV_DiffuseColour, position < 0.0f ? MakeVector(0.3f, 0.3f, 0.3f, 1.0f) : MFVector::white);
+
+//					MFRenderer_SetRenderStateOverride(MFRS_MaterialOverride, (uint32&)(tap ? pButtonMat[key] : pButtonRing[key]));
+					MFRenderer_AddModel(pButton, pSB, MFView_GetViewState());
 
 					// render the note time
 					if(bRenderNoteTimes)
@@ -529,7 +533,7 @@ void Fretboard::Draw(float time, dBChart *pSong, int track)
 		pEv = pEv->Next();
 	}
 
-	MFRenderer_SetRenderStateOverride(MFRS_MaterialOverride, NULL);
+//	MFRenderer_SetRenderStateOverride(MFRS_MaterialOverride, NULL);
 
 	// draw circles at the bottom..
 	MFMaterial_SetMaterial(pRing);

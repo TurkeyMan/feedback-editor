@@ -1,6 +1,7 @@
 #include "FeedBack.h"
 #include "Fuji/MFFileSystem.h"
 #include "Fuji/MFHeap.h"
+#include "Fuji/Util.h"
 
 #include "MidiFile.h"
 
@@ -43,7 +44,7 @@ uint32 ReadVarLen(const char *&pBuffer)
 	return value;
 }
 
-MIDIFile* LoadMidiFromFile(const char *pFile, uint32 size)
+MIDIFile* LoadMidiFromFile(const char *pFile, size_t size)
 {
 	if(!size)
 		pFile = MFFileSystem_Load(pFile, &size);

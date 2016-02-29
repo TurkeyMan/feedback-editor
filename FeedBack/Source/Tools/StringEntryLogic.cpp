@@ -3,11 +3,12 @@
 #include "Fuji/MFString.h"
 #include "Fuji/MFHeap.h"
 #include "Fuji/MFSystem.h"
+#include "Fuji/MFDisplay.h"
+#include "Fuji/MFWindow.h"
 #include "StringEntryLogic.h"
 
 #if defined(MF_WINDOWS)
 	#include <Windows.h>
-	extern HWND apphWnd;
 #endif
 
 float StringEntryLogic::gRepeatDelay = 0.3f;
@@ -51,7 +52,7 @@ void StringEntryLogic::StringCopyOverlap(char *pDest, const char *pSrc)
 	}
 	else
 	{
-		int len = MFString_Length(pSrc);
+		size_t len = MFString_Length(pSrc);
 
 		while(len >= 0)
 		{
@@ -93,6 +94,12 @@ void StringEntryLogic::Destroy()
 		MFHeap_Free(pBuffer);
 }
 
+HWND GetHWnd()
+{
+	const MFDisplaySettings *pDisplaySettings = MFDisplay_GetDisplaySettings();
+	return (HWND)MFWindow_GetSystemWindowHandle(pDisplaySettings->pWindow);
+}
+
 void StringEntryLogic::Update()
 {
 	bool shiftL = !!MFInput_Read(Key_LShift, IDD_Keyboard);
@@ -108,7 +115,7 @@ void StringEntryLogic::Update()
 #if defined(MF_WINDOWS)
 	if(ctrl && MFInput_WasPressed(Key_C, IDD_Keyboard) && selectionStart != selectionEnd)
 	{
-		BOOL opened = OpenClipboard(apphWnd);
+		BOOL opened = OpenClipboard(GetHWnd());
 
 		if(opened)
 		{
@@ -133,7 +140,7 @@ void StringEntryLogic::Update()
 	}
 	else if(ctrl && MFInput_WasPressed(Key_X, IDD_Keyboard) && selectionStart != selectionEnd)
 	{
-		BOOL opened = OpenClipboard(apphWnd);
+		BOOL opened = OpenClipboard(GetHWnd());
 
 		if(opened)
 		{
@@ -160,7 +167,7 @@ void StringEntryLogic::Update()
 	}
 	else if(ctrl && MFInput_WasPressed(Key_V, IDD_Keyboard))
 	{
-		BOOL opened = OpenClipboard(apphWnd);
+		BOOL opened = OpenClipboard(GetHWnd());
 
 		if(opened)
 		{
@@ -169,14 +176,14 @@ void StringEntryLogic::Update()
 			HANDLE hData = GetClipboardData(CF_TEXT);
 			const char *pString = (const char*)GlobalLock(hData);
 
-			int pasteLen = MFString_Length(pString);
+			size_t pasteLen = MFString_Length(pString);
 			MFString_Copy(pBuffer + cursorPos, MFStr("%s%s", pString, pBuffer + cursorPos));
 
 			GlobalUnlock(hData);
 
-			cursorPos += pasteLen;
+			cursorPos += (int)pasteLen;
 			selectionStart = selectionEnd = cursorPos;
-			stringLen += pasteLen;
+			stringLen += (int)pasteLen;
 
 			GlobalUnlock(hData);
 
@@ -203,7 +210,7 @@ void StringEntryLogic::Update()
 		// handle repeat keys
 		if(holdKey && MFInput_Read(holdKey, IDD_Keyboard))
 		{
-			repeatDelay -= MFSystem_TimeDelta();
+			repeatDelay -= MFSystem_GetTimeDelta();
 			if(repeatDelay <= 0.f)
 			{
 				keyPressed = holdKey;
@@ -341,11 +348,11 @@ void StringEntryLogic::Update()
 
 void StringEntryLogic::SetString(const char *pString)
 {
-	int len = MFString_Length(pString);
+	size_t len = MFString_Length(pString);
 	if(len < bufferLen-1)
 	{
 		MFString_Copy(pBuffer, pString);
-		selectionStart = selectionEnd = cursorPos = stringLen = len;
+		selectionStart = selectionEnd = cursorPos = stringLen = (int)len;
 
 		if(pChangeCallback)
 			pChangeCallback(pBuffer, pUserData);

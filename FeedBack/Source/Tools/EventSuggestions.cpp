@@ -17,7 +17,7 @@ void EventSuggestions::LoadEventSuggestions(const char *pEventsFile)
 {
 	ReleaseEventSuggestions();
 
-	uint32 size;
+	size_t size;
 	char *pEvents = MFFileSystem_Load(pEventsFile, &size);
 	if(pEvents)
 	{
@@ -79,7 +79,7 @@ int EventSuggestions::CollectAndSortEventSuggestions(const char *pString)
 {
 	numEventSuggestions = 0;
 
-	int len = MFString_Length(pString);
+	size_t len = MFString_Length(pString);
 
 	EventSuggestion *pES = pEventSuggestions;
 	while(pES && numEventSuggestions < MAX_SUGGESTIONS)

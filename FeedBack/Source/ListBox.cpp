@@ -138,7 +138,7 @@ void ListBoxScreen::UpdateInput()
 	if(pressed)
 	{
 		// append keystroke
-		int len = MFString_Length(typeBuffer);
+		size_t len = MFString_Length(typeBuffer);
 		if(len < 255)
 		{
 			typeBuffer[len++] = pressed;
@@ -163,7 +163,7 @@ void ListBoxScreen::UpdateInput()
 	}
 	else if(typeTimeout > 0.0f)
 	{
-		typeTimeout -= MFSystem_TimeDelta();
+		typeTimeout -= MFSystem_GetTimeDelta();
 		if(typeTimeout <= 0.0f)
 			typeBuffer[0] = 0;
 	}
@@ -176,9 +176,9 @@ void ListBoxScreen::Draw()
 	MFView_Push();
 
 	MFRect rect;
-	rect.x = MFDisplay_IsWidescreen() ? -106.0f : 0.0f;
+	rect.x = (MFDisplay_GetAspectRatio() >= 1.5) ? -106.0f : 0.0f;
 	rect.y = 0.0f;
-	rect.width = MFDisplay_IsWidescreen() ? 852.0f : 640.0f;
+	rect.width = (MFDisplay_GetAspectRatio() >= 1.5) ? 852.0f : 640.0f;
 	rect.height = 480.0f;
 	MFView_SetOrtho(&rect);
 

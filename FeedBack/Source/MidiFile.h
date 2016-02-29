@@ -124,7 +124,7 @@ struct MIDIEvent_Custom : public MIDIEvent
 	uint32 size;
 };
 
-MIDIFile* LoadMidiFromFile(const char *pFile, uint32 size = 0);
+MIDIFile* LoadMidiFromFile(const char *pFile, size_t size = 0);
 void FreeMidi(MIDIFile *pMidi);
 
 #endif

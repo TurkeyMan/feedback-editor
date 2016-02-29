@@ -148,9 +148,9 @@ void ComboBoxScreen::Draw()
 	MFView_Push();
 
 	MFRect rect;
-	rect.x = MFDisplay_IsWidescreen() ? -106.0f : 0.0f;
+	rect.x = (MFDisplay_GetAspectRatio() >= 1.5) ? -106.0f : 0.0f;
 	rect.y = 0.0f;
-	rect.width = MFDisplay_IsWidescreen() ? 852.0f : 640.0f;
+	rect.width = (MFDisplay_GetAspectRatio() >= 1.5) ? 852.0f : 640.0f;
 	rect.height = 480.0f;
 	MFView_SetOrtho(&rect);
 
@@ -197,7 +197,7 @@ void ComboBoxScreen::Draw()
 	MFFont_DrawText2(pText, x, stringY, textHeight, MFVector::white, pString);
 
 	// blink cursor
-	gBlinkTime -= MFSystem_TimeDelta();
+	gBlinkTime -= MFSystem_GetTimeDelta();
 	if(gBlinkTime < -0.4f) gBlinkTime += 0.8f;
 	bool bCursor = gBlinkTime > 0.0f;
 

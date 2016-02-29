@@ -196,8 +196,7 @@ int dBThemeScreen::Update()
 
 void dBThemeScreen::Draw()
 {
-	MFRenderer_SetClearColour(clearColour.x, clearColour.y, clearColour.z, clearColour.w);
-	MFRenderer_ClearScreen();
+	MFRenderer_ClearScreen(MFRCF_All, clearColour);
 
 	MFView_Push();
 	MFRect rect = { 0.f, 0.f, 1280, 720 };

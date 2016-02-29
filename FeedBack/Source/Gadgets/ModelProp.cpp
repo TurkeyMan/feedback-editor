@@ -19,7 +19,7 @@ dBModelProp::dBModelProp()
 dBModelProp::~dBModelProp()
 {
 	if(pModel)
-		MFModel_Destroy(pModel);
+		MFModel_Release(pModel);
 }
 
 void dBModelProp::Update()
@@ -30,7 +30,7 @@ void dBModelProp::Update()
 void dBModelProp::Draw()
 {
 	MFModel_SetWorldMatrix(pModel, GetMatrix());
-	MFModel_Draw(pModel);
+	MFRenderer_AddModel(pModel, nullptr, MFView_GetViewState());
 
 	dBEntity::Draw();
 }

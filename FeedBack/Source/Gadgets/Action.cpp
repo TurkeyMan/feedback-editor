@@ -375,7 +375,7 @@ void *dBActionManager::Lex(const char *pAction, int *pNumTokens, int preBytes)
 			token.type = type;
 			while(!(token.pToken = MFStringCache_Add(pStringCache, pNewToken)))
 			{
-				int bytes = MFStringCache_GetSize(pStringCache);
+				size_t bytes = MFStringCache_GetSize(pStringCache);
 				MFStringCache *pNew = MFStringCache_Create(bytes * 2);
 
 				const char *pOldPtr = MFStringCache_GetCache(pStringCache);
@@ -395,12 +395,12 @@ void *dBActionManager::Lex(const char *pAction, int *pNumTokens, int preBytes)
 	}
 
 	// we're done, now compact it into a nice linear buffer
-	int numTokens = tokens.size();
+	size_t numTokens = tokens.size();
 	void *pData = NULL;
 
 	if(numTokens)
 	{
-		int stringCacheSize = MFStringCache_GetSize(pStringCache);
+		size_t stringCacheSize = MFStringCache_GetSize(pStringCache);
 		int bytes = preBytes + sizeof(dBActionScript_Token) * numTokens + stringCacheSize;
 		pData = MFHeap_Alloc(bytes);
 		dBActionScript_Token *pTokens = (dBActionScript_Token*)((char*)pData + preBytes);
