@@ -17,7 +17,9 @@ solution "FeedBack"
 		objdir "../Build/"
 		targetdir "../"
 
-		flags { "StaticRuntime", "NoExceptions", "NoRTTI", "WinMain" }
+		flags { "StaticRuntime", "WinMain" }
+		exceptionhandling "Off"
+		rtti "Off"
 
 		links { "Fuji" }
 
